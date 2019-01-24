@@ -9,6 +9,10 @@ import java.util.List;
 
 import io.reactivex.Flowable;
 
+/**
+ * Demo MVVM Architecture
+ */
+
 public class UserViewModel extends ViewModel {
 
     private UserRepository mRepository;

@@ -11,12 +11,14 @@ import android.widget.TextView;
 import com.vit.demodesignpatternarchitecture.R;
 import com.vit.demodesignpatternarchitecture.data.model.User;
 import com.vit.demodesignpatternarchitecture.ui.base.BaseViewHolder;
+import com.vit.demodesignpatternarchitecture.ui.user.listener.OnClickUserItemListener;
 import com.vit.demodesignpatternarchitecture.util.GlideApp;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 
 /**
  * Demo Adapter Design Pattern
@@ -26,7 +28,10 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
 
     private List<User> mUsers = new ArrayList<>();
 
-    public UserAdapter() {
+    private final OnClickUserItemListener mListener;
+
+    public UserAdapter(OnClickUserItemListener listener) {
+        mListener = listener;
     }
 
     public void setList(List<User> users) {
@@ -70,6 +75,11 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
                     .load(user.getAvatar())
                     .circleCrop()
                     .into(mImageAvatar);
+        }
+
+        @OnClick(R.id.layout_root)
+        void onClickItem() {
+            mListener.onClickUser(mUsers.get(getAdapterPosition()));
         }
     }
 }
